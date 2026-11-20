@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>छंद · Chhand — Hindi Meter & Poetry Studio</title>
+  <meta name="description" content="AI-Powered, Meter-Aware Hindi Poetry and Lyric Co-Writer. Scans Doha, Chaupai, and custom matrik meters with deterministic precision.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Google Fonts for Typography System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-main">
+      <a href="#" class="nav-brand" aria-label="Chhand Home">
+        <span class="brand-devanagari">छंद</span>
+        <span class="brand-latin">CHHAND</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#poems" class="nav-link active">Poems</a></li>
+          <li><a href="#meters" class="nav-link" id="nav-meters-btn">Meters</a></li>
+          <li><a href="#rhymes" class="nav-link" id="nav-rhymes-btn">Rhymes</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="nav-status-wrap">
+      <button type="button" id="btn-toggle-guide" class="btn-guide-toggle" title="Show or hide beginner guide" aria-label="Toggle Beginner Guide">
+        <span>Guide</span>
+      </button>
+      <span id="overall-status-pill" class="nav-status">Analyzing...</span>
+    </div>
+  </header>
+
+  <!-- Main Application Studio -->
+  <main class="app-container">
+    
+    <!-- View 1: Poems View -->
+    <div id="poems-view" class="app-view poems-view-layout" data-view="poems">
+      
+      <!-- Top First-Time User Guidance Section -->
+      <section id="first-time-guide" class="first-time-guide-card" aria-label="First-Time User Guidance">
+        <div class="guide-header">
+          <div class="guide-title-wrap">
+            <h2 class="guide-heading">Let's write your poem.</h2>
+            <p class="guide-subheading">Choose a poetic rhythm, write your lines and let Chhand help you find the right flow.</p>
+          </div>
+          <button type="button" id="btn-dismiss-guide" class="btn-dismiss-guide" aria-label="Dismiss guide">
+            <span>Got it, start writing</span>
+          </button>
+        </div>
+        <div class="guide-steps-grid">
+          <div class="guide-step">
+            <span class="step-num">Step 1</span>
+            <h3 class="step-title">Choose your meter</h3>
+            <p class="step-desc">Select Doha, Chaupai or define your own custom matra pattern.</p>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">Step 2</span>
+            <h3 class="step-title">Write your lines</h3>
+            <p class="step-desc">Enter each poetic section in its writing box. Empty sections are not counted as errors.</p>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">Step 3</span>
+            <h3 class="step-title">Check your rhythm</h3>
+            <p class="step-desc">Chhand calculates matras in real-time and helps you improve lines needing attention.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Left Column: Poetry Editor Canvas -->
+      <section class="poem-canvas" aria-label="Poetry Editor Canvas">
+        
+        <!-- Canvas Header -->
+        <div class="canvas-header">
+          <div class="poem-title-box">
+            <span class="poem-label">POEM</span>
+            <input type="text" id="poem-title-input" class="poem-title-input" value="उजाला" aria-label="Poem Title">
+          </div>
+
+          <div class="meter-controls-wrap">
+            <div class="meter-selector" role="tablist" aria-label="Meter Selection">
+              <button type="button" class="meter-tab active" data-meter="doha" role="tab" aria-selected="true">Doha 13 · 11</button>
+              <button type="button" class="meter-tab" data-meter="chaupai" role="tab" aria-selected="false">Chaupai 16</button>
+              <button type="button" class="meter-tab" data-meter="custom" role="tab" aria-selected="false">Custom</button>
+            </div>
+            
+            <div id="custom-pattern-row" class="custom-pattern-row" style="display: none;">
+              <label for="custom-pattern-input">Custom Target:</label>
+              <input type="text" id="custom-pattern-input" class="custom-pattern-input" value="12, 12, 14, 12" placeholder="e.g. 12, 12, 14, 12">
+            </div>
+
+            <div id="meter-explanation-banner" class="meter-explanation-banner">
+              दोहा (Doha) — Four rhythmic sections following the traditional 13 · 11 · 13 · 11 matra pattern.
+            </div>
+          </div>
+        </div>
+
+        <!-- Poem Progress Bar & Demo Actions Card -->
+        <div id="poem-progress-bar-card" class="poem-progress-bar-card" aria-label="Poem Completion Progress">
+          <div class="progress-info-row">
+            <div class="progress-title-wrap">
+              <span class="progress-label">POEM PROGRESS</span>
+              <h2 id="poem-progress-title" class="progress-title">Checking rhythm and sections...</h2>
+            </div>
+            <div class="demo-actions-wrap">
+              <button type="button" id="btn-load-demo-example" class="btn-demo-action" title="Load classic verified Doha">
+                <span>Load an example</span>
+              </button>
+              <button type="button" id="btn-load-broken-example" class="btn-demo-action warning" title="Load broken Doha to test AI rewrites">
+                <span>Try a broken example</span>
+              </button>
+            </div>
+          </div>
+          <div id="poem-progress-badges" class="progress-badges-row">
+            <!-- Populated dynamically with section status chips -->
+          </div>
+        </div>
+
+        <!-- Couplet Card Container -->
+        <div class="couplet-card" id="couplet-card">
+          <div class="couplet-header">
+            <span class="couplet-name" id="couplet-name-label">Couplet 1 · Doha</span>
+            <span class="couplet-target-info" id="couplet-target-label">13 | 11 per line</span>
+          </div>
+
+          <!-- Couplets Line List -->
+          <div id="couplets-lines-container">
+            <!-- Dynamically populated / interactive charan cards -->
+          </div>
+
+          <!-- Scansion Legend & Terminology Links -->
+          <div class="scansion-legend">
+            <div class="legend-item"><span class="legend-symbol">•</span> laghu · 1 matra</div>
+            <div class="legend-item"><span class="legend-symbol">—</span> guru · 2 matras</div>
+            <div class="legend-item"><span class="legend-symbol">|</span> caesura</div>
+            <div class="legend-item">
+              <span class="legend-box-overflow"></span> past the meter
+            </div>
+            <div class="legend-item term-help-links">
+              <button type="button" class="btn-term-help" data-term="charan">What is a Charan?</button>
+              <span class="term-sep">·</span>
+              <button type="button" class="btn-term-help" data-term="matra">What is a Matra?</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Row Below Couplet -->
+        <div class="canvas-actions">
+          <button type="button" id="btn-add-couplet" class="btn-add-couplet">+ Add couplet</button>
+          <button type="button" id="btn-clear-poem" class="btn-add-couplet" style="margin-left: 0.5rem;">Clear</button>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Sidebar (AI Rewrites & Rhyme Assistant) -->
+      <aside class="sidebar" aria-label="AI Writing Tools">
+        
+        <!-- AI Suggestion Card -->
+        <div class="sidebar-card" id="rewrite-sidebar-card">
+          <div class="card-label" id="rewrite-target-line-label">AI REWRITE · सुधार</div>
+          <h2 class="card-title" id="rewrite-title">Need help fixing this line?</h2>
+          <p class="card-subtitle" id="rewrite-subtitle">
+            Choose any section that needs work, then let AI suggest meter-perfect alternatives verified by our engine.
+          </p>
+
+          <button type="button" id="btn-trigger-rewrite" class="btn-trigger-rewrite">
+            <span>Improve This Line</span>
+          </button>
+
+          <div id="suggestions-list" class="suggestions-list">
+            <!-- Populated dynamically with verified rewrites -->
+          </div>
+        </div>
+
+        <!-- Rhyme Card -->
+        <div class="sidebar-card" id="rhyme-sidebar-card">
+          <div class="card-label">RHYME FINDER · तुक</div>
+          <h2 class="card-title" style="margin-bottom: 0.35rem; font-size: 1.15rem;">Find words that rhyme</h2>
+          <p class="card-subtitle" id="rhyme-context-note">
+            Enter a Hindi word to find rhyming words that match its ending sound.
+          </p>
+          <div class="card-label" id="rhyme-ending-label" style="display: none;">Other endings</div>
+          
+          <div id="rhyme-pills-container" class="rhyme-pills">
+            <!-- Populated dynamically with rhyming word pills -->
+          </div>
+
+          <form id="rhyme-search-form" class="rhyme-input-row" onsubmit="return false;">
+            <input type="text" id="rhyme-search-input" class="rhyme-search-input" placeholder="Enter a word, e.g. प्यार" aria-label="Search Hindi rhymes">
+            <button type="submit" id="btn-find-rhymes" class="btn-find-rhymes">Find Rhymes</button>
+          </form>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- View 2: Meters View -->
+    <div id="meters-view" class="app-view meters-view-layout" data-view="meters" style="display: none;" hidden>
+      <!-- Rendered by MetersPage -->
+    </div>
+
+    <!-- View 3: Rhymes View -->
+    <div id="rhymes-view" class="app-view rhymes-view-layout" data-view="rhymes" style="display: none;" hidden>
+      <!-- Rendered by RhymesPage -->
+    </div>
+
+  </main>
+
+  <!-- Scansion Detail Modal Container -->
+  <div id="meter-detail-modal" class="modal-backdrop" style="display: none;" hidden></div>
+
+  <!-- Terminology Explanation Popover -->
+  <div id="term-popover" class="term-popover" style="display: none;" role="dialog" aria-modal="false" aria-labelledby="term-popover-title">
+    <div class="term-popover-header">
+      <span id="term-popover-title" class="term-popover-title">Term Definition</span>
+      <button type="button" id="btn-close-term-popover" class="btn-close-popover" aria-label="Close definition">✕</button>
+    </div>
+    <div id="term-popover-body" class="term-popover-body">Definition goes here.</div>
+  </div>
+
+  <!-- Global Toast Notification -->
+  <div id="global-toast" class="global-toast" style="display: none;" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

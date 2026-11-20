@@ -1,0 +1,122 @@
+[
+  {
+    "id": "broken_001",
+    "description": "Line 2 second half with extra word 'फिर', over by 2 matras (from UI mockup)",
+    "original_text": "साथ रहेगा नूर",
+    "modified_text": "साथ रहेगा फिर नूर",
+    "meter": "doha",
+    "charan_index": 1,
+    "expected_target": 11,
+    "expected_actual": 13,
+    "expected_status": "over",
+    "expected_diagnostic_fragment": "Over by 2"
+  },
+  {
+    "id": "broken_002",
+    "description": "Line 1 first half with extra word 'सदा', over by 3 matras",
+    "original_text": "मन का दीपक जब जले",
+    "modified_text": "मन का दीपक जब जले सदा",
+    "meter": "doha",
+    "charan_index": 0,
+    "expected_target": 13,
+    "expected_actual": 16,
+    "expected_status": "over",
+    "expected_diagnostic_fragment": "Over by 3"
+  },
+  {
+    "id": "broken_003",
+    "description": "Incomplete line missing final word, under by 3 matras",
+    "original_text": "मिटे अँधेरा दूर",
+    "modified_text": "मिटे अँधेरा",
+    "meter": "doha",
+    "charan_index": 1,
+    "expected_target": 11,
+    "expected_actual": 8,
+    "expected_status": "under",
+    "expected_diagnostic_fragment": "Under by 3"
+  },
+  {
+    "id": "broken_004",
+    "description": "Line containing non-Devanagari Latin script",
+    "original_text": "मन का दीपक जब जले",
+    "modified_text": "मन का deepak जब जले",
+    "meter": "doha",
+    "charan_index": 0,
+    "expected_target": 13,
+    "expected_actual": 0,
+    "expected_status": "invalid",
+    "expected_diagnostic_fragment": "Unsupported non-Devanagari"
+  },
+  {
+    "id": "broken_005",
+    "description": "Chaupai over by 2 matras with extra word 'सब' (18 instead of 16)",
+    "original_text": "जय हनुमान ज्ञान गुन सागर",
+    "modified_text": "जय हनुमान ज्ञान गुन सागर सब",
+    "meter": "chaupai",
+    "charan_index": 0,
+    "expected_target": 16,
+    "expected_actual": 18,
+    "expected_status": "over",
+    "expected_diagnostic_fragment": "Over by 2"
+  },
+  {
+    "id": "broken_006",
+    "description": "Chaupai under by 2 matras with truncated final word (14 instead of 16)",
+    "original_text": "जय कपीस तिहुँ लोक उजागर",
+    "modified_text": "जय कपीस तिहुँ लोक उजा",
+    "meter": "chaupai",
+    "charan_index": 1,
+    "expected_target": 16,
+    "expected_actual": 14,
+    "expected_status": "under",
+    "expected_diagnostic_fragment": "Under by 2"
+  },
+  {
+    "id": "broken_007",
+    "description": "Empty or incomplete charan requiring 13 matras",
+    "original_text": "मन का दीपक जब जले",
+    "modified_text": "",
+    "meter": "doha",
+    "charan_index": 0,
+    "expected_target": 13,
+    "expected_actual": 0,
+    "expected_status": "under",
+    "expected_diagnostic_fragment": "requires 13 matras"
+  },
+  {
+    "id": "broken_008",
+    "description": "Doha first half over by 1 matra with extra particle 'न' (14 instead of 13)",
+    "original_text": "मन का दीपक जब जले",
+    "modified_text": "मन का दीपक जब न जले",
+    "meter": "doha",
+    "charan_index": 0,
+    "expected_target": 13,
+    "expected_actual": 14,
+    "expected_status": "over",
+    "expected_diagnostic_fragment": "Over by 1"
+  },
+  {
+    "id": "broken_009",
+    "description": "Doha second half under by 1 matra with shortened final word (10 instead of 11)",
+    "original_text": "मिटे अँधेरा दूर",
+    "modified_text": "मिटे अँधेरा दम",
+    "meter": "doha",
+    "charan_index": 1,
+    "expected_target": 11,
+    "expected_actual": 10,
+    "expected_status": "under",
+    "expected_diagnostic_fragment": "Under by 1"
+  },
+  {
+    "id": "broken_010",
+    "description": "Line containing non-Devanagari ASCII digits",
+    "original_text": "मन का दीपक जब जले",
+    "modified_text": "मन का 123 जब जले",
+    "meter": "doha",
+    "charan_index": 0,
+    "expected_target": 13,
+    "expected_actual": 0,
+    "expected_status": "invalid",
+    "expected_diagnostic_fragment": "Unsupported non-Devanagari"
+  }
+]

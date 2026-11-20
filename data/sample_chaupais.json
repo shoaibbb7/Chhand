@@ -1,0 +1,97 @@
+[
+  {
+    "id": "chaupai_001",
+    "author": "Tulsidas",
+    "source": "Hanuman Chalisa / Ramcharitmanas (Public Domain)",
+    "charans": [
+      "जय हनुमान ज्ञान गुन सागर",
+      "जय कपीस तिहुँ लोक उजागर",
+      "राम दूत अतुलित बल धामा",
+      "अंजनि पुत्र पवनसुत नामा"
+    ],
+    "expected_targets": [16, 16, 16, 16],
+    "expected_weights": [
+      [1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1],
+      [1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1],
+      [2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2],
+      [2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2]
+    ],
+    "pronunciation_notes": ["Classical 16-matra Awadhi Chaupai."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "chaupai_002",
+    "author": "Tulsidas",
+    "source": "Ramcharitmanas, Bal Kanda (Public Domain)",
+    "charans": [
+      "बंदउ गुरु पद पदुम परागा",
+      "सुरुचि सुबास सरस अनुरागा",
+      "अमिअ मूरिमय चूरन चारू",
+      "समन सकल भव रुज परिवारू"
+    ],
+    "expected_targets": [16, 16, 16, 16],
+    "expected_weights": [],
+    "pronunciation_notes": ["Awadhi orthography and meter: exact 16|16|16|16."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "chaupai_003",
+    "author": "Tulsidas",
+    "source": "Hanuman Chalisa (Public Domain)",
+    "charans": [
+      "महाबीर बिक्रम बजरंगी",
+      "कुमति निवार सुमति के संगी",
+      "कंचन बरन बिराज सुबेसा",
+      "कानन कुंडल कुंचित केसा"
+    ],
+    "expected_targets": [16, 16, 16, 16],
+    "expected_weights": [],
+    "pronunciation_notes": ["Traditional 16-matra Awadhi Chaupai."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "chaupai_004",
+    "author": "Tulsidas",
+    "source": "Hanuman Chalisa (Public Domain)",
+    "charans": [
+      "हाथ बज्र औ ध्वजा बिराजै",
+      "काँधे मूँज जनेऊ साजै",
+      "संकर सुवन केसरीनंदन",
+      "तेज प्रताप महा जग बंदन"
+    ],
+    "expected_targets": [16, 16, 16, 16],
+    "expected_weights": [],
+    "pronunciation_notes": ["16 matras per charan."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "chaupai_005",
+    "author": "Tulsidas",
+    "source": "Hanuman Chalisa (Public Domain)",
+    "charans": [
+      "बिद्यावान गुनी अति चातुर",
+      "राम काज करिबे को आतुर",
+      "प्रभु चरित्र सुनिबे को रसिया",
+      "राम लखन सीता मन बसिया"
+    ],
+    "expected_targets": [16, 16, 16, 16],
+    "expected_weights": [],
+    "pronunciation_notes": ["Classic Chaupai cadence."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "chaupai_006",
+    "author": "Tulsidas",
+    "source": "Ramcharitmanas, Bal Kanda (Public Domain)",
+    "charans": [
+      "मंगल भवन अमंगल हारी",
+      "द्रवहु सुदसरथ अजिर बिहारी",
+      "दीन दयाल बिरिदु संभारी",
+      "हरहु नाथ मम संकट भारी"
+    ],
+    "expected_targets": [16, 16, 16, 16],
+    "expected_weights": [],
+    "pronunciation_notes": ["Most famous Ramcharitmanas 16-matra Chaupai."],
+    "validation_status": "reviewed"
+  }
+]

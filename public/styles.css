@@ -1,0 +1,2340 @@
+/* ==========================================================================
+   CHHAND (छंद) · VISUAL SYSTEM & RESPONSIVE STYLESHEET
+   Paper, ink, one indigo, one vermilion.
+   Minimalist, distraction-free Hindi literary scansion studio.
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --color-paper: #F4EFE6;          /* Ground for every screen */
+  --color-page: #FBF8F2;           /* Cards and writing surface */
+  --color-hairline: #DCD3C2;       /* Subtle architectural borders */
+  --color-hairline-dark: #C5BAA5;  /* Slightly darker border for active states */
+  --color-ink: #1D1A16;            /* Deep typography (15.1:1 on Paper) */
+  --color-ink-soft: #5B5348;       /* Labels, scansion marks, subtitles (6.6:1) */
+  
+  --color-indigo: #2A3B6E;         /* Actions and "in meter" (9.4:1) */
+  --color-indigo-hover: #1F2D54;   /* Darker indigo on hover */
+  --color-indigo-tint: #E4E8F3;    /* Passed and applied background */
+  
+  --color-vermilion: #A93B16;      /* Meter breaks only (5.5:1) */
+  --color-vermilion-tint: #F7E1D7; /* Break highlight background */
+
+  --color-amber: #8F520A;          /* Pronunciation ambiguity */
+  --color-amber-tint: #FDF3DF;     /* Ambiguity highlight */
+
+  --color-green: #1E6B38;          /* In-meter indicator */
+  --color-green-tint: #E8F5EC;     /* In-meter pill background */
+
+  /* Typography Stacks */
+  --font-poem: "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Nirmala UI", "Mangal", serif;
+  --font-ui: "IBM Plex Sans", "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+
+  /* Layout & Sizing */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --hairline: 1px solid var(--color-hairline);
+  --touch-target: 44px;
+}
+
+/* ==========================================================================
+   BASE & RESET
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+.navbar {
+  border-bottom: var(--hairline);
+  background-color: var(--color-paper);
+  padding: 0.75rem clamp(1rem, 3vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 1rem;
+}
+
+.nav-main {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  flex-wrap: wrap;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-decoration: none;
+  min-height: var(--touch-target);
+  padding: 0.25rem 0;
+}
+
+.brand-devanagari {
+  font-family: var(--font-poem);
+  font-size: clamp(1.6rem, 2.4vw, 1.95rem);
+  font-weight: 600;
+  color: var(--color-indigo);
+  line-height: 1;
+}
+
+.brand-latin {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-soft);
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  list-style: none;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  font-size: 0.9rem;
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.25rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-indigo);
+}
+
+.nav-status-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.btn-guide-toggle {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  color: var(--color-indigo);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  min-height: 32px;
+}
+
+.btn-guide-toggle:hover {
+  background-color: var(--color-indigo-tint);
+  border-color: var(--color-indigo);
+}
+
+.nav-status {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-vermilion);
+  background-color: var(--color-vermilion-tint);
+  border: 1px solid rgba(169, 59, 22, 0.2);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.nav-status.matched {
+  color: var(--color-green);
+  background-color: var(--color-green-tint);
+  border-color: rgba(30, 107, 56, 0.2);
+}
+
+/* ==========================================================================
+   APP CONTAINER & VIEW LAYOUTS
+   ========================================================================== */
+.app-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 2.5vw, 2.5rem);
+  flex: 1;
+}
+
+.app-view {
+  width: 100%;
+}
+
+.app-view[hidden] {
+  display: none !important;
+}
+
+.poems-view-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(320px, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  align-items: start;
+}
+
+.meters-view-layout,
+.rhymes-view-layout {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   FIRST-TIME USER GUIDANCE
+   ========================================================================== */
+.first-time-guide-card {
+  grid-column: 1 / -1;
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  animation: fadeIn 0.15s ease-out;
+}
+
+.guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.guide-heading {
+  font-family: var(--font-poem);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+.guide-subheading {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.btn-dismiss-guide {
+  background-color: var(--color-indigo);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.2rem;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  flex-shrink: 0;
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dismiss-guide:hover {
+  background-color: var(--color-indigo-hover);
+}
+
+.guide-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.15rem;
+}
+
+.guide-step {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-indigo);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.step-title {
+  font-family: var(--font-ui);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.step-desc {
+  font-size: 0.84rem;
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+}
+
+/* Meter explanation banner */
+.meter-explanation-banner {
+  margin-top: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+  line-height: 1.4;
+  text-align: right;
+  max-width: 360px;
+}
+
+/* ==========================================================================
+   POEM PROGRESS BAR CARD
+   ========================================================================== */
+.poem-progress-bar-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.progress-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.progress-title-wrap {
+  flex: 1;
+  min-width: 240px;
+}
+
+.progress-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.progress-title {
+  font-family: var(--font-ui);
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.35;
+}
+
+.progress-title.matched {
+  color: var(--color-green);
+}
+
+.demo-actions-wrap {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-demo-action {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-demo-action:hover {
+  background-color: var(--color-indigo-tint);
+  border-color: var(--color-indigo);
+  color: var(--color-indigo);
+}
+
+.btn-demo-action.warning:hover {
+  background-color: var(--color-vermilion-tint);
+  border-color: var(--color-vermilion);
+  color: var(--color-vermilion);
+}
+
+.progress-badges-row {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.progress-chip {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.65rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.progress-chip:hover {
+  border-color: var(--color-hairline-dark);
+}
+
+.progress-chip.matched {
+  background-color: var(--color-indigo-tint);
+  border-color: rgba(42, 59, 110, 0.3);
+  color: var(--color-indigo);
+  font-weight: 600;
+}
+
+.progress-chip.revision {
+  background-color: var(--color-vermilion-tint);
+  border-color: rgba(169, 59, 22, 0.3);
+  color: var(--color-vermilion);
+  font-weight: 600;
+}
+
+.progress-chip.not-started {
+  background-color: var(--color-paper);
+  color: var(--color-ink-soft);
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   POETRY CANVAS (LEFT COLUMN)
+   ========================================================================== */
+.poem-canvas {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Canvas Header (Poem Title + Meter Selector) */
+.canvas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.poem-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 220px;
+}
+
+.poem-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-soft);
+}
+
+.poem-title-input {
+  font-family: var(--font-poem);
+  font-size: clamp(1.75rem, 3.2vw, 2.4rem);
+  font-weight: 500;
+  color: var(--color-ink);
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  line-height: 1.2;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.15s ease;
+}
+
+.poem-title-input:focus {
+  border-bottom: 1px dashed var(--color-hairline-dark);
+}
+
+/* Meter Selector Tabs */
+.meter-controls-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.meter-selector {
+  display: inline-flex;
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.meter-tab {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.5rem clamp(0.7rem, 1.2vw, 1.1rem);
+  min-height: var(--touch-target);
+  background: transparent;
+  border: none;
+  border-right: var(--hairline);
+  color: var(--color-ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.meter-tab:last-child {
+  border-right: none;
+}
+
+.meter-tab.active {
+  background-color: var(--color-indigo);
+  color: #FFFFFF;
+}
+
+.custom-pattern-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.custom-pattern-input {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.45rem 0.65rem;
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  width: 190px;
+  min-height: 38px;
+}
+
+.custom-pattern-input:focus {
+  border-color: var(--color-indigo);
+  outline: none;
+}
+
+/* Couplet Card */
+.couplet-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: clamp(1.25rem, 2.2vw, 2rem);
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.couplet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: var(--hairline);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.couplet-name {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  font-weight: 500;
+}
+
+.couplet-target-info {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+/* Couplet Line Structure */
+.couplet-line {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed var(--color-hairline);
+}
+
+.couplet-line:last-of-type {
+  margin-bottom: 0.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Charan Cards Pair */
+.charan-cards-pair {
+  display: flex;
+  align-items: stretch;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.charan-card {
+  flex: 1;
+  min-width: 0;
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 0.95rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.charan-card:hover {
+  border-color: var(--color-hairline-dark);
+}
+
+.charan-card.active-charan {
+  border-color: var(--color-indigo);
+  box-shadow: 0 0 0 1px var(--color-indigo);
+}
+
+.charan-pair-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.15rem;
+  user-select: none;
+}
+
+.divider-bar {
+  font-family: var(--font-poem);
+  font-size: 1.5rem;
+  color: var(--color-hairline-dark);
+  font-weight: 300;
+}
+
+.charan-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.charan-meta-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.charan-title {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.charan-target-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-ink-soft);
+  background-color: rgba(0, 0, 0, 0.04);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.charan-status-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.meter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.meter-badge.matched {
+  background-color: var(--color-indigo-tint);
+  color: var(--color-indigo);
+  border: 1px solid rgba(42, 59, 110, 0.2);
+}
+
+.meter-badge.over {
+  background-color: var(--color-vermilion-tint);
+  color: var(--color-vermilion);
+  border: 1px solid rgba(169, 59, 22, 0.2);
+}
+
+.meter-badge.under {
+  background-color: var(--color-amber-tint);
+  color: var(--color-amber);
+  border: 1px solid rgba(143, 82, 10, 0.2);
+}
+
+.meter-badge.ambiguous {
+  background-color: var(--color-amber-tint);
+  color: var(--color-amber);
+  border: 1px solid rgba(143, 82, 10, 0.2);
+}
+
+.meter-badge.not-started {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--color-ink-soft);
+  border: 1px solid var(--color-hairline);
+}
+
+.charan-input-container {
+  width: 100%;
+}
+
+.charan-input {
+  width: 100%;
+  font-family: var(--font-poem);
+  font-size: clamp(1.25rem, 1.9vw, 1.65rem);
+  color: var(--color-ink);
+  background-color: var(--color-page);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  line-height: 1.4;
+  transition: all 0.15s ease;
+}
+
+.charan-input:focus {
+  border-color: var(--color-indigo);
+  background-color: #FFFFFF;
+}
+
+.charan-input.overflow-active {
+  border-color: var(--color-vermilion);
+  background-color: var(--color-vermilion-tint);
+}
+
+.charan-marks-row {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.mark-empty-placeholder {
+  color: var(--color-hairline-dark);
+  font-size: 0.9rem;
+}
+
+.scansion-marks-charan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.25rem, 0.5vw, 0.45rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  line-height: 1.2;
+}
+
+.mark-unit {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-soft);
+  position: relative;
+  min-width: 14px;
+  padding: 0 0.15rem;
+}
+
+.mark-unit.laghu {
+  font-weight: 600;
+}
+
+.mark-unit.guru {
+  font-weight: 700;
+}
+
+.mark-unit.overflow {
+  color: var(--color-vermilion);
+  background-color: var(--color-vermilion-tint);
+  border-radius: 2px;
+}
+
+.charan-feedback-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--color-hairline);
+  font-size: 0.78rem;
+}
+
+.charan-count-summary {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.charan-count-summary.matched {
+  color: var(--color-green);
+}
+
+.charan-count-summary.over {
+  color: var(--color-vermilion);
+}
+
+.charan-count-summary.under {
+  color: var(--color-amber);
+}
+
+.charan-count-summary.not-started {
+  color: var(--color-ink-soft);
+  opacity: 0.7;
+}
+
+.btn-toggle-details {
+  background: transparent;
+  border: none;
+  color: var(--color-indigo);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-toggle-details:hover {
+  background-color: var(--color-indigo-tint);
+}
+
+.charan-details-drawer {
+  margin-top: 0.45rem;
+  padding: 0.75rem;
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  animation: fadeIn 0.15s ease-out;
+}
+
+.detailed-scansion-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.akshara-detail-cell {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.55rem;
+  text-align: center;
+  min-width: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.akshara-detail-cell.guru {
+  border-color: var(--color-hairline-dark);
+}
+
+.akshara-detail-cell.overflow {
+  background-color: var(--color-vermilion-tint);
+  border-color: var(--color-vermilion);
+}
+
+.cell-akshara-text {
+  font-family: var(--font-poem);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.cell-mark {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-ink-soft);
+}
+
+.cell-weight {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-indigo);
+}
+
+.cell-cumulative {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-ink-soft);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 2px;
+  padding: 0.05rem 0.2rem;
+}
+
+.empty-detail-note {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+/* Scansion Legend */
+.scansion-legend {
+  border-top: var(--hairline);
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.85rem);
+  font-size: 0.75rem;
+  color: var(--color-ink-soft);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend-symbol {
+  font-weight: 700;
+}
+
+.legend-box-overflow {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  background-color: var(--color-vermilion-tint);
+  border: 1px solid var(--color-vermilion);
+  border-radius: 2px;
+}
+
+.term-help-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+}
+
+.btn-term-help {
+  background: transparent;
+  border: none;
+  color: var(--color-indigo);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.btn-term-help:hover {
+  color: var(--color-indigo-hover);
+}
+
+.term-sep {
+  color: var(--color-hairline);
+}
+
+/* Terminology Popover */
+.term-popover {
+  position: absolute;
+  width: min(340px, 90vw);
+  background-color: var(--color-page);
+  border: 1px solid var(--color-hairline-dark);
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  padding: 1rem 1.15rem;
+  z-index: 1500;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.term-popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-bottom: var(--hairline);
+  padding-bottom: 0.35rem;
+}
+
+.term-popover-title {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.btn-close-popover {
+  background: transparent;
+  border: none;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.btn-close-popover:hover {
+  color: var(--color-ink);
+}
+
+.term-popover-body {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+}
+
+.canvas-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-add-couplet {
+  background-color: transparent;
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.15rem;
+  min-height: var(--touch-target);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-add-couplet:hover {
+  background-color: var(--color-page);
+  border-color: var(--color-hairline-dark);
+}
+
+/* ==========================================================================
+   SIDEBAR (RIGHT COLUMN)
+   ========================================================================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.sidebar-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.card-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-soft);
+  margin-bottom: 0.25rem;
+}
+
+.card-title {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 0.35rem;
+}
+
+.card-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  line-height: 1.45;
+  margin-bottom: 1.15rem;
+}
+
+/* AI Rewrite Button */
+.btn-trigger-rewrite {
+  width: 100%;
+  margin-bottom: 1.15rem;
+  padding: 0.65rem 1rem;
+  min-height: var(--touch-target);
+  background-color: var(--color-page);
+  border: 1px solid var(--color-indigo);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-indigo);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-trigger-rewrite:hover {
+  background-color: var(--color-indigo);
+  color: #FFFFFF;
+}
+
+/* Suggestions List */
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.suggestion-item {
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+  background-color: #FFFFFF;
+}
+
+.suggestion-text {
+  font-family: var(--font-poem);
+  font-size: 1.35rem;
+  color: var(--color-ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.suggestion-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.suggestion-matras {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-indigo);
+}
+
+.suggestion-verified-badge {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-green);
+  background-color: var(--color-green-tint);
+  border: 1px solid rgba(30, 107, 56, 0.25);
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.suggestion-meaning-note {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+.suggestion-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn-accept {
+  background-color: var(--color-indigo);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 1.15rem;
+  min-height: 38px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.btn-accept:hover {
+  background-color: var(--color-indigo-hover);
+}
+
+.btn-skip {
+  background: transparent;
+  border: none;
+  color: var(--color-ink-soft);
+  font-size: 0.82rem;
+  min-height: 38px;
+  cursor: pointer;
+  padding: 0.45rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-skip:hover {
+  color: var(--color-ink);
+}
+
+/* Rhyme Section */
+.rhyme-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  margin-bottom: 1.15rem;
+}
+
+.rhyme-pill {
+  font-family: var(--font-poem);
+  font-size: 1.1rem;
+  background-color: #FFFFFF;
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.85rem;
+  min-height: 38px;
+  color: var(--color-ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.rhyme-pill:hover {
+  border-color: var(--color-indigo);
+  background-color: var(--color-indigo-tint);
+}
+
+.rhyme-input-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.rhyme-search-input {
+  flex: 1;
+  font-family: var(--font-poem);
+  font-size: 1.05rem;
+  padding: 0.45rem 0.75rem;
+  min-height: var(--touch-target);
+  background-color: #FFFFFF;
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.rhyme-search-input:focus {
+  border-color: var(--color-indigo);
+}
+
+.btn-find-rhymes {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  min-height: var(--touch-target);
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.btn-find-rhymes:hover {
+  background-color: var(--color-hairline);
+}
+
+/* Empty & Loading States */
+.empty-state {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  text-align: center;
+  padding: 1.75rem 1rem;
+  line-height: 1.5;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-hairline);
+  border-top-color: var(--color-indigo);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Accessibility Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-indigo);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   PAGE COMMON & HEADER STYLES (METERS & RHYMES)
+   ========================================================================== */
+.page-intro-header {
+  margin-bottom: 2.25rem;
+}
+
+.page-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.page-main-heading {
+  font-family: var(--font-poem);
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.page-description {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   METERS LIBRARY PAGE
+   ========================================================================== */
+.meters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  margin-bottom: 2.5rem;
+}
+
+.meter-library-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.meter-library-card:hover {
+  border-color: var(--color-hairline-dark);
+}
+
+.meter-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.meter-card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.meter-devanagari-title {
+  font-family: var(--font-poem);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.1;
+}
+
+.meter-english-title {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  font-weight: 500;
+}
+
+.meter-pattern-badge {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-indigo);
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.meter-card-desc {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
+.meter-visualizer {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.visualizer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.visualizer-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  min-width: 90px;
+}
+
+.visualizer-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.matra-visual-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-indigo);
+  display: inline-block;
+  opacity: 0.85;
+}
+
+.meter-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.btn-secondary-meter {
+  flex: 1;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  background-color: transparent;
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.85rem;
+  min-height: var(--touch-target);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-secondary-meter:hover {
+  background-color: var(--color-paper);
+  border-color: var(--color-hairline-dark);
+}
+
+.btn-primary-meter {
+  flex: 1.25;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: var(--color-indigo);
+  border: 1px solid var(--color-indigo);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  min-height: var(--touch-target);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-primary-meter:hover {
+  background-color: var(--color-indigo-hover);
+}
+
+/* Custom Builder Panel */
+.custom-builder-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.builder-header .card-title {
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.builder-charans-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 500px;
+}
+
+.builder-charan-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.builder-charan-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  min-width: 75px;
+}
+
+.builder-matra-input {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.5rem;
+  width: 70px;
+  text-align: center;
+  outline: none;
+}
+
+.builder-matra-input:focus {
+  border-color: var(--color-indigo);
+}
+
+.builder-unit-label {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.btn-remove-charan {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--color-vermilion);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0.25rem 0.5rem;
+}
+
+.btn-remove-charan:hover {
+  text-decoration: underline;
+}
+
+.builder-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.75rem;
+  border-top: var(--hairline);
+}
+
+/* Scansion Detail Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(29, 26, 22, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.modal-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  max-width: 620px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.modal-title {
+  font-family: var(--font-poem);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.modal-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-indigo);
+}
+
+.btn-close-modal {
+  font-size: 1.75rem;
+  background: transparent;
+  border: none;
+  line-height: 1;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-desc {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
+.modal-meta-box {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--color-ink);
+}
+
+.modal-sample-box {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sample-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sample-line {
+  font-family: var(--font-poem);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1.4;
+}
+
+.sample-source {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-ink-soft);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: var(--hairline);
+}
+
+/* ==========================================================================
+   RHYMES STUDIO PAGE
+   ========================================================================== */
+.rhyme-search-main-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rhyme-main-search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rhyme-page-input {
+  font-family: var(--font-poem);
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+  width: 100%;
+  outline: none;
+  min-height: 52px;
+}
+
+.rhyme-page-input:focus {
+  border-color: var(--color-indigo);
+}
+
+.btn-clear-input {
+  position: absolute;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.search-actions-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rhyme-results-display {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.rhyme-results-summary-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.results-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.results-count-pill {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: var(--color-indigo-tint);
+  color: var(--color-indigo);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+}
+
+.results-target-word {
+  font-family: var(--font-poem);
+  font-size: 1.15rem;
+  color: var(--color-ink);
+}
+
+.results-tail-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+}
+
+.rhyme-match-group {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.match-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.badge-match-type {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+}
+
+.badge-match-type.exact {
+  background-color: var(--color-green-tint);
+  color: var(--color-green);
+  border: 1px solid rgba(30, 107, 56, 0.25);
+}
+
+.badge-match-type.approx {
+  background-color: var(--color-amber-tint);
+  color: var(--color-amber);
+  border: 1px solid rgba(143, 82, 10, 0.25);
+}
+
+.match-group-count {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.rhyme-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.rhyme-word-card {
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.rhyme-word-card:hover {
+  border-color: var(--color-hairline-dark);
+}
+
+.chip-word-title {
+  font-family: var(--font-poem);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+.chip-word-title:hover {
+  color: var(--color-indigo);
+}
+
+.chip-actions {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.btn-chip-action {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.55rem;
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-page);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-chip-action:hover {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.btn-chip-action.primary {
+  background-color: var(--color-indigo-tint);
+  color: var(--color-indigo);
+  border-color: rgba(42, 59, 110, 0.25);
+}
+
+.btn-chip-action.primary:hover {
+  background-color: var(--color-indigo);
+  color: #FFFFFF;
+}
+
+.btn-chip-action.copied {
+  background-color: var(--color-green-tint);
+  color: var(--color-green);
+  border-color: rgba(30, 107, 56, 0.25);
+}
+
+/* Rhyme Families Exploration */
+.rhyme-families-section {
+  margin-top: 1.5rem;
+}
+
+.section-title-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.section-heading {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 0.25rem;
+}
+
+.section-subtext {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--color-ink-soft);
+}
+
+.rhyme-families-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.rhyme-family-card {
+  background-color: var(--color-page);
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: border-color 0.15s ease;
+}
+
+.rhyme-family-card:hover {
+  border-color: var(--color-hairline-dark);
+}
+
+.family-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.family-ending-title {
+  font-family: var(--font-poem);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-indigo);
+}
+
+.family-word-count {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+.family-sample-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.family-sample-btn {
+  font-family: var(--font-poem);
+  font-size: 1.05rem;
+  background-color: var(--color-paper);
+  border: var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  color: var(--color-ink);
+  transition: all 0.15s ease;
+}
+
+.family-sample-btn:hover {
+  background-color: var(--color-indigo-tint);
+  color: var(--color-indigo);
+}
+
+.btn-explore-family {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-indigo);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  margin-top: auto;
+}
+
+.btn-explore-family:hover {
+  text-decoration: underline;
+}
+
+/* Global Toast */
+.global-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-ink);
+  color: #FFFFFF;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  z-index: 2000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* 1. Desktop: 1200px and above */
+@media (min-width: 1200px) {
+  .poems-view-layout {
+    grid-template-columns: minmax(0, 1.85fr) minmax(320px, 1fr);
+  }
+}
+
+/* 2. Tablets & Small Laptops: 768px to 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .app-container {
+    padding: 1.5rem 1.25rem 3rem 1.25rem;
+  }
+
+  .poems-view-layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .canvas-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .meter-controls-wrap {
+    align-items: flex-start;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* 3. Mobile / Large Phones: Under 768px */
+@media (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.65rem 1rem;
+    gap: 0.65rem;
+  }
+
+  .nav-main {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .nav-status-wrap {
+    justify-content: flex-start;
+  }
+
+  .nav-status {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-container {
+    padding: 1rem 0.85rem 3rem 0.85rem;
+  }
+
+  .poems-view-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .meters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rhyme-chips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rhyme-families-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .meter-controls-wrap {
+    align-items: stretch;
+  }
+
+  .meter-selector {
+    width: 100%;
+  }
+
+  .meter-tab {
+    flex: 1;
+    text-align: center;
+  }
+
+  .custom-pattern-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .custom-pattern-input {
+    width: 100%;
+  }
+
+  .couplet-card {
+    padding: 1.15rem 1rem;
+  }
+
+  .couplet-header {
+    margin-bottom: 1.15rem;
+  }
+
+  /* When charans cannot fit side by side on phone screens, adapt gracefully */
+  .charan-cards-pair {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .charan-pair-divider {
+    display: none;
+  }
+
+  .first-time-guide-card {
+    padding: 1.15rem 1rem;
+  }
+
+  .guide-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .meter-explanation-banner {
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .progress-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .demo-actions-wrap {
+    width: 100%;
+  }
+
+  .btn-demo-action {
+    flex: 1;
+    text-align: center;
+  }
+
+  .term-help-links {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-accept,
+  .btn-skip {
+    min-height: var(--touch-target);
+  }
+}
+
+/* 4. Small Phones: Under 480px */
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 0.6rem;
+  }
+
+  .nav-link {
+    font-size: 0.82rem;
+  }
+
+  .poem-title-input {
+    font-size: 1.6rem;
+  }
+
+  .charan-input {
+    font-size: 1.35rem;
+  }
+
+  .rhyme-input-row {
+    flex-direction: column;
+  }
+
+  .btn-find-rhymes {
+    width: 100%;
+  }
+
+  .scansion-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .canvas-actions {
+    flex-direction: column;
+  }
+
+  .btn-add-couplet {
+    width: 100%;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

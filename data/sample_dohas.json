@@ -1,0 +1,277 @@
+[
+  {
+    "id": "doha_001",
+    "author": "Kabir Das",
+    "source": "Kabir Granthavali (Public Domain)",
+    "charans": [
+      "बड़ा हुआ तो क्या हुआ",
+      "जैसे पेड़ खजूर",
+      "पंथी को छाया नहीं",
+      "फल लागे अति दूर"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [
+      [1, 2, 1, 2, 2, 2, 1, 2],
+      [2, 2, 2, 1, 1, 2, 1],
+      [2, 2, 2, 2, 2, 1, 2],
+      [1, 1, 2, 2, 1, 1, 2, 1]
+    ],
+    "pronunciation_notes": ["Traditional Pingala matrik count."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "doha_002",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "रहिमन धागा प्रेम का",
+      "मत तोड़ो चटकाय",
+      "टूटे से फिर ना जुड़े",
+      "जुड़े गांठ परि जाय"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [
+      [1, 1, 1, 1, 2, 2, 2, 1, 2],
+      [1, 1, 2, 2, 1, 1, 2, 1],
+      [2, 2, 2, 1, 1, 2, 1, 2],
+      [1, 2, 2, 1, 1, 1, 2, 1]
+    ],
+    "pronunciation_notes": ["प्रेम: प्रे is guru (2), म is laghu (1)."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "doha_003",
+    "author": "Kabir Das",
+    "source": "Kabir Sakhi (Public Domain)",
+    "charans": [
+      "गुरु गोविंद दोऊ खड़े",
+      "काके लागूं पाय",
+      "बलिहारी गुरु आपने",
+      "गोविंद दियो बताय"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [
+      [1, 1, 2, 2, 2, 1, 1, 2],
+      [2, 2, 2, 2, 2, 1],
+      [1, 1, 2, 2, 1, 1, 2, 2],
+      [2, 2, 1, 2, 1, 2, 1]
+    ],
+    "pronunciation_notes": ["Dialectal shortening of 'ऊ' to 'उ' in two-syllable do-u."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_004",
+    "author": "Chhand Studio Benchmark (Author couplet)",
+    "source": "Chhand Test Suite",
+    "charans": [
+      "मन का दीपक जब जले",
+      "मिटे अँधेरा दूर",
+      "सीख सदा सच की रखो",
+      "साथ रहेगा नूर"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [
+      [1, 1, 2, 2, 1, 1, 1, 1, 1, 2],
+      [1, 2, 1, 2, 2, 2, 1],
+      [2, 1, 1, 2, 1, 1, 2, 1, 2],
+      [2, 1, 1, 2, 2, 2, 1]
+    ],
+    "pronunciation_notes": ["अँधेरा carries chandrabindu on short vowel (1 matra)."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "doha_005",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "जो रहीम उत्तम प्रकृति",
+      "का करि सकत कुसंग",
+      "चंदन विष व्यापत नहीं",
+      "लपटे रहत भुजंग"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Braj Bhasha dialectal prosody."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_006",
+    "author": "Kabir Das",
+    "source": "Bijak (Public Domain)",
+    "charans": [
+      "पोथी पढ़ि पढ़ि जग मुआ",
+      "पंडित भया न कोय",
+      "ढाई आखर प्रेम का",
+      "पढ़े सो पंडित होय"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Dialectal variants on आखर and पंडित."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_007",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "रहिमन देखि बड़ेन को",
+      "लघु न दीजिए डारि",
+      "जहां काम आवै सुई",
+      "कहा करै तरवारि"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Old Hindi verbal forms आवै/करै."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_008",
+    "author": "Kabir Das",
+    "source": "Kabir Granthavali (Public Domain)",
+    "charans": [
+      "काल करै सो आज कर",
+      "आज करै सो अब",
+      "पल में परलय होएगी",
+      "बहुरि करेगा कब"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Braj verb inflection."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_009",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "दोनों रहिमन एक से",
+      "जौं लों बोलत नाहिं",
+      "जान परत हैं काग पिक",
+      "रितु बसंत के माहिं"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Nasalization marker on नाहिं and माहिं."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_010",
+    "author": "Kabir Das",
+    "source": "Kabir Sakhi (Public Domain)",
+    "charans": [
+      "माटी कहै कुम्हार से",
+      "तू क्या रूँदे मोय",
+      "एक दिन ऐसा आएगा",
+      "मैं रूँदूंगी तोय"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Folk Devanagari orthography."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_011",
+    "author": "Kabir Das",
+    "source": "Kabir Granthavali (Public Domain)",
+    "charans": [
+      "माला फेरत जुग भया",
+      "गया न मन का फेर",
+      "कर का मनका डारि दे",
+      "मन का मनका फेर"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Yamaka alankara meter balance."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_012",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "रूठे सुजन मनाइए",
+      "जो रूठै सौ बार",
+      "रहिमन फिरि फिरि पोइए",
+      "टूटे मुक्ताहार"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Awadhi/Braj forms."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_013",
+    "author": "Kabir Das",
+    "source": "Kabir Sakhi (Public Domain)",
+    "charans": [
+      "ऐसी बानी बोलिए",
+      "मन का आपा खोय",
+      "औरन को सीतल करै",
+      "आपहु सीतल होय"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["सीतल variant of शीतल."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_014",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "तरुवर फल नहिं खात हैं",
+      "सरवर पियहिं न पान",
+      "कहि रहीम पर काज हित",
+      "संपत्ति संचहिं सुजान"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Classical Awadhi matra count."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_015",
+    "author": "Kabir Das",
+    "source": "Kabir Granthavali (Public Domain)",
+    "charans": [
+      "दुःख में सुमिरन सब करे",
+      "सुख में करे न कोय",
+      "जो सुख में सुमिरन करे",
+      "तो दुःख काहे होय"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Visarga in दुःख creates guru weight."],
+    "validation_status": "needs_review"
+  },
+  {
+    "id": "doha_016",
+    "author": "Bihari Lal",
+    "source": "Bihari Satsai (Public Domain)",
+    "charans": [
+      "सतसैया के दोहरे",
+      "ज्यों नावक के तीर",
+      "देखन में छोटे लगैं",
+      "घाव करैं गंभीर"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Classic Braj Bhasha Satsai doha."],
+    "validation_status": "reviewed"
+  },
+  {
+    "id": "doha_017",
+    "author": "Rahim",
+    "source": "Rahim Dohavali (Public Domain)",
+    "charans": [
+      "रूठे सुजन मनाइए",
+      "जो रूठैं सौ बार",
+      "रहिमन फिरि फिरि पोइए",
+      "टूटे मुक्ता हार"
+    ],
+    "expected_targets": [13, 11, 13, 11],
+    "expected_weights": [],
+    "pronunciation_notes": ["Traditional Pingala matrik verification: exact 13|11|13|11."],
+    "validation_status": "reviewed"
+  }
+]
